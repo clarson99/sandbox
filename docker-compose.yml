@@ -91,3 +91,15 @@ services:
       context: ./documentation
     ports:
       - "3010:3000"
+
+  grafana:
+    build:
+      context: ./grafana
+    container_name: grafana
+    ports:
+      - 9000:3000
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    # grafana requires network access to InfluxDB
+    links:
+      - influxdb
